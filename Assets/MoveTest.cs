@@ -10,6 +10,7 @@ public class MoveTest : MonoBehaviour
     Vector3 RightDirect = new Vector3(1, 0, 0);
     Vector3 LeftDirect = new Vector3(-1, 0, 0);
     Vector3 WorldForward = new Vector3(0, 0, 1);
+    Vector3 WorldBackward = new Vector3(0, 0, -1);
 
     Transform trans;
     void Start()
@@ -23,78 +24,65 @@ public class MoveTest : MonoBehaviour
         //Move Forward
         if(Input.GetKey(KeyCode.W))
         {
-            trans.position += trans.forward * Time.deltaTime * MoveSpeed;
+            float costhetaF = Vector3.Dot(Vector3.Normalize(trans.forward), WorldForward);
+            float costhetaR = Vector3.Dot(Vector3.Normalize(trans.forward), RightDirect);
+            if (costhetaF >= 0.9 && costhetaF <= 1)
+            {
+                trans.forward = WorldForward;
+                trans.position += trans.forward * MoveSpeed * Time.deltaTime;
+            }
+            else
+            {
+                //rd : set rotate direct
+                float rd = costhetaR > 0 ? -1 : 1;
+                trans.Rotate(trans.up, rd * Time.deltaTime * RotateSpeed);
+            }
+        }
+        else if(Input.GetKey(KeyCode.D))
+        {
+            float costhetaF = Vector3.Dot(Vector3.Normalize(trans.forward), WorldForward);
+            float costhetaR = Vector3.Dot(Vector3.Normalize(trans.forward), RightDirect);
+            if (costhetaR >= 0.9 && costhetaR <= 1)
+            {
+                trans.forward = RightDirect;
+                trans.position += trans.forward * MoveSpeed * Time.deltaTime;
+            }
+            else
+            {
+                float rd = costhetaF > 0 ? 1 : -1;
+                trans.Rotate(trans.up, rd * Time.deltaTime * RotateSpeed);
+            }
         }
         else if(Input.GetKey(KeyCode.A))
         {
-            trans.position += -trans.right * Time.deltaTime * MoveSpeed;
+            float costhetaF = Vector3.Dot(Vector3.Normalize(trans.forward), WorldForward);
+            float costhetaL = Vector3.Dot(Vector3.Normalize(trans.forward), LeftDirect);
+            if (costhetaL >= 0.9 && costhetaL <= 1)
+            {
+                trans.forward = LeftDirect;
+                trans.position += trans.forward * MoveSpeed * Time.deltaTime;
+            }
+            else
+            {
+                float rd = costhetaF > 0 ? -1 : 1;
+                trans.Rotate(trans.up, rd * Time.deltaTime * RotateSpeed);
+            }
         }
-        else if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.S))
         {
-            trans.position += trans.right * Time.deltaTime * MoveSpeed;
+            float costhetaB = Vector3.Dot(Vector3.Normalize(trans.forward), WorldBackward);
+            float costhetaR = Vector3.Dot(Vector3.Normalize(trans.forward), RightDirect);
+            if (costhetaB >= 0.9 && costhetaB <= 1)
+            {
+                trans.forward = WorldBackward;
+                trans.position += trans.forward * MoveSpeed * Time.deltaTime;
+            }
+            else
+            {
+                float rd = costhetaR > 0 ? 1 : -1;
+                trans.Rotate(trans.up, rd * Time.deltaTime * RotateSpeed);
+            }
         }
     }
 }
 
-/*
- else
-        {
-            //move right
-            if(Input.GetKey(KeyCode.D))
-            {
-                float costhetaW = Vector3.Dot(Vector3.Normalize(trans.forward), WorldForward);
-                float costhetaR = Vector3.Dot(Vector3.Normalize(trans.forward), RightDirect);
-                print($"Costheta {costhetaW} , {costhetaR}");
-                if (costhetaW >= 0 && costhetaR >= 0)
-                    trans.Rotate(trans.up, Time.deltaTime * RotateSpeed);
-                else
-                {
-                    trans.forward = RightDirect;
-                    trans.position += trans.forward * MoveSpeed * Time.deltaTime;
-                }
-            }
-            //move left
-            if(Input.GetKey(KeyCode.A))
-            {
-                float costhetaW = Vector3.Dot(Vector3.Normalize(trans.forward), WorldForward);
-                float costhetaL = Vector3.Dot(Vector3.Normalize(trans.forward), LeftDirect);
-                print($"Costheta {costhetaW} , {costhetaL}");
-                if (costhetaW >= 0 && costhetaL >= 0)
-                    trans.Rotate(trans.up, -Time.deltaTime * RotateSpeed);
-                else
-                {
-                    trans.forward = LeftDirect;
-                    trans.position += trans.forward * MoveSpeed * Time.deltaTime;
-                }
-            }
-        }
- */
-
-/*
- * //else
-    //{
-    //    //move right
-    //    if(Input.GetKey(KeyCode.D))
-    //    {
-    //        float costhetaW = Vector3.Dot(Vector3.Normalize(trans.forward), WorldForward);
-    //        float costhetaR = Vector3.Dot(Vector3.Normalize(trans.forward), RightDirect);
-    //        if (costhetaW >= 0)
-    //        {
-    //            if(costhetaR)
-    //        }
-    //    }
-    //    //move left
-    //    if(Input.GetKey(KeyCode.A))
-    //    {
-    //        float costhetaW = Vector3.Dot(Vector3.Normalize(trans.forward), WorldForward);
-    //        float costhetaL = Vector3.Dot(Vector3.Normalize(trans.forward), LeftDirect);
-    //        if (costhetaW >= 0 && costhetaL >= 0)
-    //            trans.Rotate(trans.up, -Time.deltaTime * RotateSpeed);
-    //        else
-    //        {
-    //            trans.forward = LeftDirect;
-    //            trans.position += trans.forward * MoveSpeed * Time.deltaTime;
-    //        }
-    //    }
-    //}
- */
