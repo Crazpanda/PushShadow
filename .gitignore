@@ -1,0 +1,11 @@
+.vs/
+Library/
+Logs/
+obj/
+Packages/
+ProjectSettings/
+UserSettings/
+.vsode/
+.vsconfig
+Assembly-CSharp.csproj
+TouchShadow.sln
