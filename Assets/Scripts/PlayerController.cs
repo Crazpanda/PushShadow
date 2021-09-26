@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public float MoveSpeed = 100.0f;
     public float RotateSpeed = 100.0f;
-    public Transform CameraTrans;
+    //public Transform CameraTrans;
 
     Vector3 WorldRightDirect = new Vector3(1, 0, 0);
     Vector3 WorldLeftDirect = new Vector3(-1, 0, 0);
@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     Vector3 WorldBackwardDirect = new Vector3(0, 0, -1);
 
     Transform trans;
+    CharacterController Controller;
 
     void PlayerInteract()
     {
@@ -87,24 +88,46 @@ public class PlayerController : MonoBehaviour
         //Move
     }
 
+    void PlayerMove2()
+    {
+        //Move 
+        if (Input.GetKey(KeyCode.W))
+        {
+            Controller.Move(trans.forward * MoveSpeed);
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            trans.Rotate(trans.up, Time.deltaTime * RotateSpeed);
+        }
+        else if (Input.GetKey(KeyCode.A))
+        {
+            trans.Rotate(trans.up, -Time.deltaTime * RotateSpeed);
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            Controller.Move(-trans.forward * MoveSpeed);
+        }
+        //Move
+    }
     void Start()
     {
         trans = GetComponent<Transform>();
+        Controller = GetComponent<CharacterController>();
 
         //set WorldDirect
-        Vector3 projF = Vector3.Scale(CameraTrans.forward,new Vector3(1,0,1)).normalized;
-        Vector3 projR = Vector3.Scale(CameraTrans.right, new Vector3(1, 0, 1)).normalized;
+        //Vector3 projF = Vector3.Scale(CameraTrans.forward,new Vector3(1,0,1)).normalized;
+        //Vector3 projR = Vector3.Scale(CameraTrans.right, new Vector3(1, 0, 1)).normalized;
 
-        WorldForwardDirect = projF;
-        WorldBackwardDirect = -projF;
-        WorldRightDirect = projR;
-        WorldLeftDirect = -projR;
+        //WorldForwardDirect = projF;
+        //WorldBackwardDirect = -projF;
+        //WorldRightDirect = projR;
+        //WorldLeftDirect = -projR;
     }
 
     // Update is called once per frame
     void Update()
     {
-        PlayerMove();
+        PlayerMove2();
 
         if(Input.GetKeyDown(KeyCode.E))
         {
