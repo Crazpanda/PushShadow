@@ -13,7 +13,7 @@ public class ShadowModeManager : MonoBehaviour
         }
     }
 
-    SortedSet<ShadowInteractableBase> shadowInteractables;
+    HashSet<ShadowInteractableBase> shadowInteractables;
     ShadowMode _currentShadowMode = ShadowMode.Normal;
 
     public ShadowMode CurrentShadowMode
@@ -24,13 +24,22 @@ public class ShadowModeManager : MonoBehaviour
         }
     }
 
+    HashSet<ShadowTrigger> shadowsPlayerIn;
+    public bool IsPlayerInShadow
+    {
+        get
+        {
+            return shadowsPlayerIn.Count > 0;
+        }
+    }
 
     void Awake()
     {
         if (_instance == null)
         {
             _instance = this;
-            shadowInteractables = new SortedSet<ShadowInteractableBase>();
+            shadowInteractables = new HashSet<ShadowInteractableBase>();
+            shadowsPlayerIn = new HashSet<ShadowTrigger>();
         }
         else
         {
@@ -57,6 +66,28 @@ public class ShadowModeManager : MonoBehaviour
             return;
         }
         shadowInteractables.Remove(interactable);
+    }
+
+    public void OnPlayerEnterShadow(ShadowTrigger shadowTrigger)
+    {
+        if (shadowsPlayerIn.Contains(shadowTrigger))
+        {
+            Debug.LogWarning($"[ShadowModeManager] Player is already in {shadowTrigger.gameObject.name}.");
+            return;
+        }
+        shadowsPlayerIn.Add(shadowTrigger);
+        Debug.Log($"[ShadowModeManager] Player entered {shadowTrigger.gameObject.name}.");
+    }
+
+    public void OnPlayerExitShadow(ShadowTrigger shadowTrigger)
+    {
+        if (!shadowsPlayerIn.Contains(shadowTrigger))
+        {
+            Debug.LogWarning($"[ShadowModeManager] Player is not in {shadowTrigger.gameObject.name}.");
+            return;
+        }
+        shadowsPlayerIn.Remove(shadowTrigger);
+        Debug.Log($"[ShadowModeManager] Player exited {shadowTrigger.gameObject.name}, IsPlayerInShadow = {IsPlayerInShadow}");
     }
 
     public void ChangeShadowMode(ShadowMode shadowMode)
