@@ -102,7 +102,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6749045927627819117}
-  - component: {fileID: 471767002458309351}
   - component: {fileID: 4882447911666070296}
   - component: {fileID: 1231604452853141526}
   m_Layer: 8
@@ -128,20 +127,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &471767002458309351
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6749045927627819121}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.1
-  m_Height: 0.4
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!143 &4882447911666070296
 CharacterController:
   m_ObjectHideFlags: 0
@@ -153,11 +138,11 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 0.4
+  m_Height: 0.6
   m_Radius: 0.1
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_SkinWidth: 0.01
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1231604452853141526
@@ -174,6 +159,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxMoveSpeed: 2
   RotateSpeed: 200
+  gravityMultiplier: 0.5
+  OnPlayerInteract:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7376714071546456609
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,7 +255,6 @@ GameObject:
   - component: {fileID: 5918101989456613803}
   - component: {fileID: 7006935070360565206}
   - component: {fileID: 2412701215906622004}
-  - component: {fileID: 569553879929855187}
   m_Layer: 8
   m_Name: Capsule
   m_TagString: Player
@@ -338,17 +326,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &569553879929855187
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8444179114781216588}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
