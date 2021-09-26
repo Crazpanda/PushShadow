@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveTest : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public float MoveSpeed = 100.0f;
     public float RotateSpeed = 100.0f;
-    public Vector3 CatchOffset;
+    public Transform CameraTrans;
 
     Vector3 WorldRightDirect = new Vector3(1, 0, 0);
     Vector3 WorldLeftDirect = new Vector3(-1, 0, 0);
@@ -14,19 +14,16 @@ public class MoveTest : MonoBehaviour
     Vector3 WorldBackwardDirect = new Vector3(0, 0, -1);
 
     Transform trans;
-    Transform CatchedTrans;
 
-    void Start()
+    void PlayerInteract()
     {
-        trans = GetComponent<Transform>();
+        Debug.LogError("Call Interact");
     }
 
-    // Update is called once per frame
-    void Update()
+    void PlayerMove()
     {
-
         //Move 
-        if(Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W))
         {
             float costhetaF = Vector3.Dot(Vector3.Normalize(trans.forward), WorldForwardDirect);
             float costhetaR = Vector3.Dot(Vector3.Normalize(trans.forward), WorldRightDirect);
@@ -42,7 +39,7 @@ public class MoveTest : MonoBehaviour
                 trans.Rotate(trans.up, rd * Time.deltaTime * RotateSpeed);
             }
         }
-        else if(Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D))
         {
             float costhetaF = Vector3.Dot(Vector3.Normalize(trans.forward), WorldForwardDirect);
             float costhetaR = Vector3.Dot(Vector3.Normalize(trans.forward), WorldRightDirect);
@@ -57,7 +54,7 @@ public class MoveTest : MonoBehaviour
                 trans.Rotate(trans.up, rd * Time.deltaTime * RotateSpeed);
             }
         }
-        else if(Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A))
         {
             float costhetaF = Vector3.Dot(Vector3.Normalize(trans.forward), WorldForwardDirect);
             float costhetaL = Vector3.Dot(Vector3.Normalize(trans.forward), WorldLeftDirect);
@@ -72,7 +69,7 @@ public class MoveTest : MonoBehaviour
                 trans.Rotate(trans.up, rd * Time.deltaTime * RotateSpeed);
             }
         }
-        if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S))
         {
             float costhetaB = Vector3.Dot(Vector3.Normalize(trans.forward), WorldBackwardDirect);
             float costhetaR = Vector3.Dot(Vector3.Normalize(trans.forward), WorldRightDirect);
@@ -88,26 +85,31 @@ public class MoveTest : MonoBehaviour
             }
         }
         //Move
+    }
 
-        if(CatchedTrans)
+    void Start()
+    {
+        trans = GetComponent<Transform>();
+
+        //set WorldDirect
+        Vector3 projF = Vector3.Scale(CameraTrans.forward,new Vector3(1,0,1)).normalized;
+        Vector3 projR = Vector3.Scale(CameraTrans.right, new Vector3(1, 0, 1)).normalized;
+
+        WorldForwardDirect = projF;
+        WorldBackwardDirect = -projF;
+        WorldRightDirect = projR;
+        WorldLeftDirect = -projR;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        PlayerMove();
+
+        if(Input.GetKeyDown(KeyCode.E))
         {
-            CatchedTrans.position = trans.position + CatchOffset;
+            PlayerInteract();
         }
-    }
 
-    public void CatchObject(MonoBehaviour Src)
-    {
-        CatchedTrans = Src.GetComponent<Transform>();
-    }
-    public void FreeCatch()
-    {
-        CatchedTrans = null;
-    }
-    
-    //Test Free Catch
-    private void OnMouseDown()
-    {
-        FreeCatch();
     }
 }
-
