@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShadowTrigger : MonoBehaviour
+public class ShadowVolume : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {

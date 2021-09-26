@@ -24,7 +24,7 @@ public class ShadowModeManager : MonoBehaviour
         }
     }
 
-    HashSet<ShadowTrigger> shadowsPlayerIn;
+    HashSet<ShadowVolume> shadowsPlayerIn;
     public bool IsPlayerInShadow
     {
         get
@@ -39,7 +39,7 @@ public class ShadowModeManager : MonoBehaviour
         {
             _instance = this;
             shadowInteractables = new HashSet<ShadowInteractableBase>();
-            shadowsPlayerIn = new HashSet<ShadowTrigger>();
+            shadowsPlayerIn = new HashSet<ShadowVolume>();
         }
         else
         {
@@ -68,7 +68,7 @@ public class ShadowModeManager : MonoBehaviour
         shadowInteractables.Remove(interactable);
     }
 
-    public void OnPlayerEnterShadow(ShadowTrigger shadowTrigger)
+    public void OnPlayerEnterShadow(ShadowVolume shadowTrigger)
     {
         if (shadowsPlayerIn.Contains(shadowTrigger))
         {
@@ -79,7 +79,7 @@ public class ShadowModeManager : MonoBehaviour
         Debug.Log($"[ShadowModeManager] Player entered {shadowTrigger.gameObject.name}.");
     }
 
-    public void OnPlayerExitShadow(ShadowTrigger shadowTrigger)
+    public void OnPlayerExitShadow(ShadowVolume shadowTrigger)
     {
         if (!shadowsPlayerIn.Contains(shadowTrigger))
         {
@@ -92,6 +92,10 @@ public class ShadowModeManager : MonoBehaviour
 
     public void ChangeShadowMode(ShadowMode shadowMode)
     {
+        if (IsPlayerInShadow && shadowMode == ShadowMode.Interactive)
+        {
+            return;
+        }
         _currentShadowMode = shadowMode;
         foreach (var shadowInterable in shadowInteractables)
         {

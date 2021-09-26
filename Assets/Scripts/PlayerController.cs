@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
-    public float MoveSpeed = 100.0f;
+    public float MaxMoveSpeed = 100.0f;
     public float RotateSpeed = 100.0f;
+
+    public float gravityMultiplier = 0.5f;
     //public Transform CameraTrans;
+
+    Vector3 playerVelocity;
 
     Vector3 WorldRightDirect = new Vector3(1, 0, 0);
     Vector3 WorldLeftDirect = new Vector3(-1, 0, 0);
@@ -16,9 +21,11 @@ public class PlayerController : MonoBehaviour
     Transform trans;
     CharacterController Controller;
 
+    public UnityEvent OnPlayerInteract;
+
     void PlayerInteract()
     {
-        Debug.LogError("Call Interact");
+        OnPlayerInteract.Invoke();
     }
 
     void PlayerMove()
@@ -31,7 +38,7 @@ public class PlayerController : MonoBehaviour
             if (costhetaF >= 0.9 && costhetaF <= 1)
             {
                 trans.forward = WorldForwardDirect;
-                trans.position += trans.forward * MoveSpeed * Time.deltaTime;
+                trans.position += trans.forward * MaxMoveSpeed * Time.deltaTime;
             }
             else
             {
@@ -47,7 +54,7 @@ public class PlayerController : MonoBehaviour
             if (costhetaR >= 0.9 && costhetaR <= 1)
             {
                 trans.forward = WorldRightDirect;
-                trans.position += trans.forward * MoveSpeed * Time.deltaTime;
+                trans.position += trans.forward * MaxMoveSpeed * Time.deltaTime;
             }
             else
             {
@@ -62,7 +69,7 @@ public class PlayerController : MonoBehaviour
             if (costhetaL >= 0.9 && costhetaL <= 1)
             {
                 trans.forward = WorldLeftDirect;
-                trans.position += trans.forward * MoveSpeed * Time.deltaTime;
+                trans.position += trans.forward * MaxMoveSpeed * Time.deltaTime;
             }
             else
             {
@@ -77,7 +84,7 @@ public class PlayerController : MonoBehaviour
             if (costhetaB >= 0.9 && costhetaB <= 1)
             {
                 trans.forward = WorldBackwardDirect;
-                trans.position += trans.forward * MoveSpeed * Time.deltaTime;
+                trans.position += trans.forward * MaxMoveSpeed * Time.deltaTime;
             }
             else
             {
@@ -90,29 +97,33 @@ public class PlayerController : MonoBehaviour
 
     void PlayerMove2()
     {
+        Vector3 gravity = Physics.gravity * gravityMultiplier;
+
+        bool groundedPlayer = Controller.isGrounded;
+        if (groundedPlayer && playerVelocity.y < 0.0f)
+        {
+            playerVelocity.y = 0.0f;
+        }
+
+        trans.Rotate(trans.up, Time.deltaTime * RotateSpeed * Input.GetAxis("Horizontal"));
+
         //Move 
-        if (Input.GetKey(KeyCode.W))
-        {
-            Controller.Move(trans.forward * MoveSpeed);
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            trans.Rotate(trans.up, Time.deltaTime * RotateSpeed);
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            trans.Rotate(trans.up, -Time.deltaTime * RotateSpeed);
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            Controller.Move(-trans.forward * MoveSpeed);
-        }
+
+        Vector3 move = new Vector3(0.0f, 0.0f, Input.GetAxis("Vertical"));
+
+        Controller.Move(trans.rotation * (move * Time.deltaTime * MaxMoveSpeed));
+
+        playerVelocity += gravity * Time.deltaTime;
+        Controller.Move(gravity * Time.deltaTime);
+
         //Move
     }
     void Start()
     {
         trans = GetComponent<Transform>();
         Controller = GetComponent<CharacterController>();
+
+        playerVelocity = Vector3.zero;
 
         //set WorldDirect
         //Vector3 projF = Vector3.Scale(CameraTrans.forward,new Vector3(1,0,1)).normalized;
