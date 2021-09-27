@@ -1,10 +1,13 @@
 ﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 Shader "Custom/ShadowDrawer"
 {
     Properties
     {
         _Color ("Shadow Color", Color) = (0, 0, 0, 0.6)
+        _ShadowThreshold ("Shadow Threshold", Range(0.0, 1.0)) = 0.5
     }
 
     CGINCLUDE
@@ -18,6 +21,7 @@ Shader "Custom/ShadowDrawer"
     };
 
     half4 _Color;
+    float _ShadowThreshold;
 
     v2f_shadow vert_shadow(appdata_full v)
     {
@@ -30,6 +34,7 @@ Shader "Custom/ShadowDrawer"
     half4 frag_shadow(v2f_shadow IN) : SV_Target
     {
         half atten = LIGHT_ATTENUATION(IN);
+        atten = smoothstep(0.01, _ShadowThreshold, atten);
         return half4(_Color.rgb, lerp(_Color.a, 0, atten));
     }
 
@@ -69,16 +74,16 @@ Shader "Custom/ShadowDrawer"
         }
 
         // Forward base pass
-        // Pass
-        // {
-        //     Tags { "LightMode" = "ForwardBase" }
-        //     Blend SrcAlpha OneMinusSrcAlpha
-        //     CGPROGRAM
-        //     #pragma vertex vert_shadow
-        //     #pragma fragment frag_shadow
-        //     #pragma multi_compile_fwdbase
-        //     ENDCG
-        // }
+        Pass
+        {
+            Tags { "LightMode" = "ForwardBase" }
+            Blend SrcAlpha OneMinusSrcAlpha
+            CGPROGRAM
+            #pragma vertex vert_shadow
+            #pragma fragment frag_shadow
+            #pragma multi_compile_fwdbase
+            ENDCG
+        }
 
         // Forward add pass
         Pass
