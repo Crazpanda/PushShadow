@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
+using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     public float MaxMoveSpeed = 100.0f;
@@ -11,15 +11,16 @@ public class PlayerController : MonoBehaviour
     public float gravityMultiplier = 0.5f;
     //public Transform CameraTrans;
 
+    public Button MobileMoveButton;
+    public Button MobileRotateButton;
+
     Vector3 playerVelocity;
 
-    Vector3 WorldRightDirect = new Vector3(1, 0, 0);
-    Vector3 WorldLeftDirect = new Vector3(-1, 0, 0);
-    Vector3 WorldForwardDirect = new Vector3(0, 0, 1);
-    Vector3 WorldBackwardDirect = new Vector3(0, 0, -1);
-
     Transform trans;
-    CharacterController Controller;
+    CharacterController controller;
+
+    MobileHandle moveHandle;
+    MobileHandle rotateHandle;
 
     public UnityEvent OnPlayerInteract;
 
@@ -28,78 +29,11 @@ public class PlayerController : MonoBehaviour
         OnPlayerInteract.Invoke();
     }
 
-    void PlayerMove()
-    {
-        //Move 
-        if (Input.GetKey(KeyCode.W))
-        {
-            float costhetaF = Vector3.Dot(Vector3.Normalize(trans.forward), WorldForwardDirect);
-            float costhetaR = Vector3.Dot(Vector3.Normalize(trans.forward), WorldRightDirect);
-            if (costhetaF >= 0.9 && costhetaF <= 1)
-            {
-                trans.forward = WorldForwardDirect;
-                trans.position += trans.forward * MaxMoveSpeed * Time.deltaTime;
-            }
-            else
-            {
-                //rd : set rotate direct
-                float rd = costhetaR > 0 ? -1 : 1;
-                trans.Rotate(trans.up, rd * Time.deltaTime * RotateSpeed);
-            }
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            float costhetaF = Vector3.Dot(Vector3.Normalize(trans.forward), WorldForwardDirect);
-            float costhetaR = Vector3.Dot(Vector3.Normalize(trans.forward), WorldRightDirect);
-            if (costhetaR >= 0.9 && costhetaR <= 1)
-            {
-                trans.forward = WorldRightDirect;
-                trans.position += trans.forward * MaxMoveSpeed * Time.deltaTime;
-            }
-            else
-            {
-                float rd = costhetaF > 0 ? 1 : -1;
-                trans.Rotate(trans.up, rd * Time.deltaTime * RotateSpeed);
-            }
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            float costhetaF = Vector3.Dot(Vector3.Normalize(trans.forward), WorldForwardDirect);
-            float costhetaL = Vector3.Dot(Vector3.Normalize(trans.forward), WorldLeftDirect);
-            if (costhetaL >= 0.9 && costhetaL <= 1)
-            {
-                trans.forward = WorldLeftDirect;
-                trans.position += trans.forward * MaxMoveSpeed * Time.deltaTime;
-            }
-            else
-            {
-                float rd = costhetaF > 0 ? -1 : 1;
-                trans.Rotate(trans.up, rd * Time.deltaTime * RotateSpeed);
-            }
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            float costhetaB = Vector3.Dot(Vector3.Normalize(trans.forward), WorldBackwardDirect);
-            float costhetaR = Vector3.Dot(Vector3.Normalize(trans.forward), WorldRightDirect);
-            if (costhetaB >= 0.9 && costhetaB <= 1)
-            {
-                trans.forward = WorldBackwardDirect;
-                trans.position += trans.forward * MaxMoveSpeed * Time.deltaTime;
-            }
-            else
-            {
-                float rd = costhetaR > 0 ? 1 : -1;
-                trans.Rotate(trans.up, rd * Time.deltaTime * RotateSpeed);
-            }
-        }
-        //Move
-    }
-
     void PlayerMove2()
     {
         Vector3 gravity = Physics.gravity * gravityMultiplier;
 
-        bool groundedPlayer = Controller.isGrounded;
+        bool groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0.0f)
         {
             playerVelocity.y = 0.0f;
@@ -111,28 +45,47 @@ public class PlayerController : MonoBehaviour
 
         Vector3 move = new Vector3(0.0f, 0.0f, Input.GetAxis("Vertical"));
 
-        Controller.Move(trans.rotation * (move * Time.deltaTime * MaxMoveSpeed));
+        controller.Move(trans.rotation * (move * Time.deltaTime * MaxMoveSpeed));
 
         playerVelocity += gravity * Time.deltaTime;
-        Controller.Move(gravity * Time.deltaTime);
+        controller.Move(gravity * Time.deltaTime);
 
         //Move
     }
+
+    void PlayerMove3()
+    {
+        Vector3 gravity = Physics.gravity * gravityMultiplier;
+
+        bool groundedPlayer = controller.isGrounded;
+        if (groundedPlayer && playerVelocity.y < 0.0f)
+        {
+            playerVelocity.y = 0.0f;
+        }
+
+        trans.Rotate(trans.up, Time.deltaTime * RotateSpeed * GetMobileHorizontal());
+
+        //Move 
+
+        Vector3 move = new Vector3(0.0f, 0.0f, GetMobileVertical());
+
+        controller.Move(trans.rotation * (move * Time.deltaTime * MaxMoveSpeed));
+
+        playerVelocity += gravity * Time.deltaTime;
+        controller.Move(gravity * Time.deltaTime);
+
+        //Move
+    }
+
     void Start()
     {
         trans = GetComponent<Transform>();
-        Controller = GetComponent<CharacterController>();
+        controller = GetComponent<CharacterController>();
 
         playerVelocity = Vector3.zero;
 
-        //set WorldDirect
-        //Vector3 projF = Vector3.Scale(CameraTrans.forward,new Vector3(1,0,1)).normalized;
-        //Vector3 projR = Vector3.Scale(CameraTrans.right, new Vector3(1, 0, 1)).normalized;
-
-        //WorldForwardDirect = projF;
-        //WorldBackwardDirect = -projF;
-        //WorldRightDirect = projR;
-        //WorldLeftDirect = -projR;
+        moveHandle = MobileMoveButton.GetComponent<MobileHandle>();
+        rotateHandle = MobileRotateButton.GetComponent<MobileHandle>();
     }
 
     // Update is called once per frame
@@ -140,10 +93,29 @@ public class PlayerController : MonoBehaviour
     {
         PlayerMove2();
 
-        if(Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             PlayerInteract();
         }
+    }
 
+    float GetMobileVertical()
+    {
+        if (!moveHandle) return 0.0f;
+
+        float v = moveHandle.HandleMovedDirection.y;
+        v = v==0.0f?0.0f: v / Mathf.Abs(v);
+
+        return v;
+    }
+
+    float GetMobileHorizontal()
+    {
+        if (!rotateHandle) return 0.0f;
+
+        float v = rotateHandle.HandleMovedDirection.x;
+        v = v == 0.0f ? 0.0f : v / Mathf.Abs(v);
+
+        return v;
     }
 }
