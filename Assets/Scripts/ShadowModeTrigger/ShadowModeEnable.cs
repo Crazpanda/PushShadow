@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShadowModeEnable : ShadowInteractableBase
+public class ShadowModeEnable : ShadowModeChangeBehaviorBase
 {
     public bool disableInShadowMode = false;
     public GameObject[] gameObjsToEnable;

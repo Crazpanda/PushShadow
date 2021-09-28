@@ -13,7 +13,7 @@ public class ShadowModeManager : MonoBehaviour
         }
     }
 
-    HashSet<ShadowInteractableBase> shadowInteractables;
+    HashSet<ShadowModeChangeBehaviorBase> shadowInteractables;
     ShadowMode _currentShadowMode = ShadowMode.Normal;
 
     public ShadowMode CurrentShadowMode
@@ -38,7 +38,7 @@ public class ShadowModeManager : MonoBehaviour
         if (_instance == null)
         {
             _instance = this;
-            shadowInteractables = new HashSet<ShadowInteractableBase>();
+            shadowInteractables = new HashSet<ShadowModeChangeBehaviorBase>();
             shadowsPlayerIn = new HashSet<ShadowVolume>();
         }
         else
@@ -48,7 +48,7 @@ public class ShadowModeManager : MonoBehaviour
         }
     }
 
-    public void RegisterInteractable(ShadowInteractableBase interactable)
+    public void RegisterInteractable(ShadowModeChangeBehaviorBase interactable)
     {
         if (shadowInteractables.Contains(interactable))
         {
@@ -58,7 +58,7 @@ public class ShadowModeManager : MonoBehaviour
         shadowInteractables.Add(interactable);
     }
 
-    public void UnregisterInteractable(ShadowInteractableBase interactable)
+    public void UnregisterInteractable(ShadowModeChangeBehaviorBase interactable)
     {
         if (!shadowInteractables.Contains(interactable))
         {
