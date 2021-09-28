@@ -29,9 +29,28 @@ public class PlayerController : MonoBehaviour
         OnPlayerInteract.Invoke();
     }
 
+    public int JumpTime = 300;
+    public float JumpSpeed = 0.0f;
+    public float DropSpeed = 0.0f;
+    int jumpHeight = 0;
     void PlayerMove2()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (jumpHeight <= -JumpTime)
+                jumpHeight = JumpTime;
+        }
+        jumpHeight = Mathf.Max(--jumpHeight, -10000);
+
         Vector3 gravity = Physics.gravity * gravityMultiplier;
+        if(jumpHeight > 0)
+        {
+            gravity = -gravity * JumpSpeed;
+        }
+        else
+        {
+            gravity = gravity * DropSpeed;
+        }
 
         bool groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0.0f)
@@ -66,7 +85,6 @@ public class PlayerController : MonoBehaviour
         trans.Rotate(trans.up, Time.deltaTime * RotateSpeed * GetMobileHorizontal());
 
         //Move 
-
         Vector3 move = new Vector3(0.0f, 0.0f, GetMobileVertical());
 
         controller.Move(trans.rotation * (move * Time.deltaTime * MaxMoveSpeed));
@@ -91,20 +109,45 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerMove3();
+        PlayerMove2();
 
         if (Input.GetKeyDown(KeyCode.E))
         {
             PlayerInteract();
         }
+
     }
+
+    //float GetMobileVertical()
+    //{
+    //    if (!moveHandle) return 0.0f;
+
+    //    float v = moveHandle.HandleMovedDirection.y;
+    //    v = v==0.0f?0.0f: v / Mathf.Abs(v);
+
+    //    return v;
+    //}
+
+    //float GetMobileHorizontal()
+    //{
+    //    if (!rotateHandle) return 0.0f;
+
+    //    float v = rotateHandle.HandleMovedDirection.x;
+    //    v = v == 0.0f ? 0.0f : v / Mathf.Abs(v);
+
+    //    return v;
+    //}
 
     float GetMobileVertical()
     {
         if (!moveHandle) return 0.0f;
 
-        float v = moveHandle.HandleMovedDirection.y;
-        v = v==0.0f?0.0f: v / Mathf.Abs(v);
+        float v = 0.0f;
+        float theta = Vector2.Dot(new Vector2(0,1), moveHandle.HandleMovedDirection.normalized);
+        if(Mathf.Abs(theta) > 0.8)
+        {
+            v = theta/ Mathf.Abs(theta);
+        }
 
         return v;
     }
@@ -113,8 +156,12 @@ public class PlayerController : MonoBehaviour
     {
         if (!rotateHandle) return 0.0f;
 
-        float v = rotateHandle.HandleMovedDirection.x;
-        v = v == 0.0f ? 0.0f : v / Mathf.Abs(v);
+        float v = 0.0f;
+        float theta = Vector2.Dot(new Vector2(1, 0), moveHandle.HandleMovedDirection.normalized);
+        if (Mathf.Abs(theta) > 0.8)
+        {
+            v = theta / Mathf.Abs(theta);
+        }
 
         return v;
     }
