@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     public Button MobileMoveButton;
     public Button MobileRotateButton;
-
+    
     Vector3 playerVelocity;
 
     Transform trans;
@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerMove2();
+        PlayerMove3();
 
         if (Input.GetKeyDown(KeyCode.E))
         {
