@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Interact2Disable : InteractableBase
+public class Trigger2Disable : GameplayEvent
 {
     public GameObject[] objectsToDisable;
 
-    public override void OnInteract()
+    public override void OnEventTriggered()
     {
         foreach (var obj in objectsToDisable)
         {

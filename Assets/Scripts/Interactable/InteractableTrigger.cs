@@ -7,7 +7,7 @@ public class InteractableTrigger : MonoBehaviour
     public bool canInteractInShadowMode = true;
     public bool canInteractInNormalMode = true;
 
-    public InteractableBase[] interactables;
+    public GameplayEvent[] interactables;
 
     void OnInteract()
     {
@@ -16,7 +16,7 @@ public class InteractableTrigger : MonoBehaviour
         {
             foreach (var interactable in interactables)
             {
-                interactable.OnInteract();
+                interactable.OnEventTriggered();
             }
         }
     }
