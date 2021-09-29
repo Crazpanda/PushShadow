@@ -15,7 +15,7 @@ public class CameraAction : MonoBehaviour
     Vector2 rectSize;
     uint currentFrame = 0;
     uint sequenceId = 0;
-    float beginAspect;
+
     void Start()
     {
         TargetCamera = GetComponent<Camera>();
@@ -23,7 +23,6 @@ public class CameraAction : MonoBehaviour
         beginPosition = TargetCamera.rect.position;
         rectSize = TargetCamera.rect.size;
 
-        beginAspect = TargetCamera.aspect;
     }
 
     // Update is called once per frame
@@ -78,6 +77,10 @@ public class CameraAction : MonoBehaviour
     //启动摄像机运动
     public void BeginAction()
     {
+        beginPosition = TargetCamera.rect.position;
+        currentFrame = 0;
+        sequenceId = 0;
+
         isRunning = true;
     }
 }

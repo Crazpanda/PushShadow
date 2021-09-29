@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SwitchButton : MonoBehaviour,IPointerClickHandler
+public class SwitchButton : MonoBehaviour,IPointerClickHandler,IPointerUpHandler
 {
     public Sprite LightenModeIcon;
     public Sprite ShadowModeIcon;
@@ -16,6 +16,12 @@ public class SwitchButton : MonoBehaviour,IPointerClickHandler
     bool isManualLight = false;
     bool isManulaShadow = false;
 
+    bool isClick = false;
+    public bool IsClick
+    {
+        get { return isClick; }
+    }
+
     //true : LightenMode , false : ShadowMode
     bool state = true;
     bool LightState
@@ -25,6 +31,7 @@ public class SwitchButton : MonoBehaviour,IPointerClickHandler
 
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {
+        isClick = true;
 
         if (state)
         {
@@ -67,6 +74,11 @@ public class SwitchButton : MonoBehaviour,IPointerClickHandler
         
     }
 
+    void LateUpdate()
+    {
+        isClick = false;
+    }
+
     public void SetManualButton()
     {
         isManualLight = true;
@@ -76,5 +88,9 @@ public class SwitchButton : MonoBehaviour,IPointerClickHandler
             image.sprite = ManualLightenModeIcon;
         else
             image.sprite = ManualShadowModeIcon;
+    }
+
+    void IPointerUpHandler.OnPointerUp(PointerEventData eventData)
+    {
     }
 }

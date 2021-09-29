@@ -67,6 +67,11 @@ public class PlayerController : MonoBehaviour
         controller.Move(gravity * Time.deltaTime);
 
         //Move
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            PlayerInteract();
+        }
     }
 
     void PlayerMove3()
@@ -104,6 +109,11 @@ public class PlayerController : MonoBehaviour
         controller.Move(gravity * Time.deltaTime);
 
         //Move
+
+        if (MobileSwitchButton.IsClick)
+        {
+            PlayerInteract();
+        }
     }
 
     void Start()
@@ -119,12 +129,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         PlayerMove2();
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            PlayerInteract();
-        }
-
     }
 
     //float GetMobileVertical()
