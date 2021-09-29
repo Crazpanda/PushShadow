@@ -11,8 +11,6 @@ public class SwitchButton : MonoBehaviour,IPointerClickHandler,IPointerUpHandler
     public Sprite ManualLightenModeIcon;
     public Sprite ManualShadowModeIcon;
 
-    public PlayerController controllor;
-
     Image image;
 
     bool isManualLight = false;
@@ -35,30 +33,38 @@ public class SwitchButton : MonoBehaviour,IPointerClickHandler,IPointerUpHandler
     {
         isClick = true;
 
-        controllor.OnPlayerInteract.Invoke();
+        //if (state)
+        //{
+        //    if (isManulaShadow)
+        //    {
+        //        image.sprite = ManualShadowModeIcon;
+        //        isManulaShadow = false;
+        //    }
+        //    else
+        //        image.sprite = ShadowModeIcon;
+        //    state = false;
+        //}
+        //else if (!state)
+        //{
+        //    if (isManualLight)
+        //    {
+        //        image.sprite = ManualLightenModeIcon;
+        //        isManualLight = false;
+        //    }
+        //    else
+        //        image.sprite = LightenModeIcon;
 
-        if (state)
+        //    state = true;
+        //}
+
+        ShadowMode mode = ShadowModeManager.Instance.CurrentShadowMode;
+        if (mode == ShadowMode.Interactive)
         {
-            if (isManulaShadow)
-            {
-                image.sprite = ManualShadowModeIcon;
-                isManulaShadow = false;
-            }
-            else
-                image.sprite = ShadowModeIcon;
-            state = false;
+            ShadowModeManager.Instance.ChangeShadowMode(ShadowMode.Normal);
         }
-        else if (!state)
+        else
         {
-            if (isManualLight)
-            {
-                image.sprite = ManualLightenModeIcon;
-                isManualLight = false;
-            }
-            else
-                image.sprite = LightenModeIcon;
-
-            state = true;
+            ShadowModeManager.Instance.ChangeShadowMode(ShadowMode.Interactive);
         }
     }
 
@@ -75,7 +81,15 @@ public class SwitchButton : MonoBehaviour,IPointerClickHandler,IPointerUpHandler
     // Update is called once per frame
     void Update()
     {
-        
+        ShadowMode mode = ShadowModeManager.Instance.CurrentShadowMode;
+        if (mode == ShadowMode.Interactive)
+        {
+            image.sprite = ShadowModeIcon;
+        }
+        else
+        {
+            image.sprite = LightenModeIcon;
+        }
     }
 
     void LateUpdate()
