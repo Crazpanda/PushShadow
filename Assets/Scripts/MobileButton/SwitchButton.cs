@@ -11,6 +11,8 @@ public class SwitchButton : MonoBehaviour,IPointerClickHandler,IPointerUpHandler
     public Sprite ManualLightenModeIcon;
     public Sprite ManualShadowModeIcon;
 
+    public PlayerController controllor;
+
     Image image;
 
     bool isManualLight = false;
@@ -32,6 +34,8 @@ public class SwitchButton : MonoBehaviour,IPointerClickHandler,IPointerUpHandler
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {
         isClick = true;
+
+        controllor.OnPlayerInteract.Invoke();
 
         if (state)
         {

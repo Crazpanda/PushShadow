@@ -673,6 +673,10 @@ PrefabInstance:
       value: SwitchButton
       objectReference: {fileID: 0}
     - target: {fileID: 7266627841231022910, guid: 659c90bee0d7d874bb0e91b183ddeb72, type: 3}
+      propertyPath: controllor
+      value: 
+      objectReference: {fileID: 1231604452853141526}
+    - target: {fileID: 7266627841231022910, guid: 659c90bee0d7d874bb0e91b183ddeb72, type: 3}
       propertyPath: ManualShadowModeIcon
       value: 
       objectReference: {fileID: 21300000, guid: 36b012d3925ed6448a62221259cc529e, type: 3}

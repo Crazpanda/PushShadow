@@ -110,10 +110,10 @@ public class PlayerController : MonoBehaviour
 
         //Move
 
-        if (MobileSwitchButton.IsClick)
-        {
-            PlayerInteract();
-        }
+        //if (MobileSwitchButton.IsClick)
+        //{
+        //    PlayerInteract();
+        //}
     }
 
     void Start()
