@@ -42,8 +42,6 @@ public class JumpButton : MonoBehaviour,IPointerDownHandler,IPointerUpHandler
     {
         image = GetComponent<Image>();
         image.sprite = JumpOffIcon;
-
-        SetManualButton();
     }
 
     // Update is called once per frame

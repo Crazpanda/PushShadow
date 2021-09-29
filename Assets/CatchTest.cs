@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CatchTest : MonoBehaviour
 {
-    public MoveTest Character;
+    public CameraAction action;
 
     // Start is called before the first frame update
     void Start()
@@ -15,11 +15,15 @@ public class CatchTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            action.BeginAction();
+            action.SetFadeFactor(0.5f);
+        }
     }
 
     private void OnMouseDown()
     {
-        Character.CatchObject(this);
+
     }
 }

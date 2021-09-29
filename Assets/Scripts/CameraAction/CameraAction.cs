@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class CameraAction : MonoBehaviour
 {
-    public Camera TargetCamera;
+    
     public Vector3[] PathSequence;
+
+    private Camera TargetCamera;
 
     bool isRunning = false;
     Vector2 beginPosition;
@@ -16,6 +18,8 @@ public class CameraAction : MonoBehaviour
     float beginAspect;
     void Start()
     {
+        TargetCamera = GetComponent<Camera>();
+
         beginPosition = TargetCamera.rect.position;
         rectSize = TargetCamera.rect.size;
 
@@ -25,9 +29,6 @@ public class CameraAction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
-            BeginAction();
-
         if (isRunning)
         {
             float t = (int)PathSequence[sequenceId].z <= 0 ? 1.01f : (float)(currentFrame) / PathSequence[sequenceId].z;
@@ -46,10 +47,6 @@ public class CameraAction : MonoBehaviour
             Action(t);
 
             currentFrame++;
-            TargetCamera.aspect = beginAspect;
-            TargetCamera.ResetAspect();
-
-            Debug.Log(TargetCamera.aspect.ToString());
         }
     }
 
@@ -62,6 +59,23 @@ public class CameraAction : MonoBehaviour
         TargetCamera.rect = new Rect(p, rectSize);
     }
 
+    public Material PostProcessMat;
+    void OnRenderImage(RenderTexture src, RenderTexture dst)
+    {
+        if (!PostProcessMat) return;
+
+        PostProcessMat.SetFloat("_FadeFactor", fade);
+        Graphics.Blit(src, dst, PostProcessMat);
+    }
+
+    //设置画面亮度
+    float fade = 1.0f;
+    public void SetFadeFactor(float f)
+    {
+        fade = f;
+    }
+
+    //启动摄像机运动
     public void BeginAction()
     {
         isRunning = true;

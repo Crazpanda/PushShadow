@@ -8,8 +8,13 @@ public class SwitchButton : MonoBehaviour,IPointerClickHandler
 {
     public Sprite LightenModeIcon;
     public Sprite ShadowModeIcon;
+    public Sprite ManualLightenModeIcon;
+    public Sprite ManualShadowModeIcon;
 
     Image image;
+
+    bool isManualLight = false;
+    bool isManulaShadow = false;
 
     //true : LightenMode , false : ShadowMode
     bool state = true;
@@ -23,12 +28,25 @@ public class SwitchButton : MonoBehaviour,IPointerClickHandler
 
         if (state)
         {
-            image.sprite = ShadowModeIcon;
+            if (isManulaShadow)
+            {
+                image.sprite = ManualShadowModeIcon;
+                isManulaShadow = false;
+            }
+            else
+                image.sprite = ShadowModeIcon;
             state = false;
         }
         else if (!state)
         {
-            image.sprite = LightenModeIcon;
+            if (isManualLight)
+            {
+                image.sprite = ManualLightenModeIcon;
+                isManualLight = false;
+            }
+            else
+                image.sprite = LightenModeIcon;
+
             state = true;
         }
     }
@@ -39,11 +57,24 @@ public class SwitchButton : MonoBehaviour,IPointerClickHandler
         image = GetComponent<Image>();
         image.sprite = LightenModeIcon;
         state = true;
+
+        //SetManualButton();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void SetManualButton()
+    {
+        isManualLight = true;
+        isManulaShadow = true;
+
+        if (state)
+            image.sprite = ManualLightenModeIcon;
+        else
+            image.sprite = ManualShadowModeIcon;
     }
 }

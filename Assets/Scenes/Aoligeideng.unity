@@ -304,7 +304,7 @@ GameObject:
   - component: {fileID: 453386814}
   - component: {fileID: 453386813}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: CameraViewMove
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -317,14 +317,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 453386812}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b64a9308020d5143b578fba7d0ff097, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TargetCamera: {fileID: 802042697}
   PathSequence:
-  - {x: 0.5, y: 0, z: 500}
+  - {x: 0.7, y: 0, z: 500}
   - {x: 0.5, y: 0.5, z: 1000}
   - {x: 0, y: 0.5, z: 200}
 --- !u!4 &453386814
@@ -418,6 +418,7 @@ GameObject:
   - component: {fileID: 802042698}
   - component: {fileID: 802042697}
   - component: {fileID: 802042696}
+  - component: {fileID: 802042699}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -454,8 +455,8 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1
-    height: 1
+    width: 0.5
+    height: 0.5
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -490,6 +491,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 22.668, y: 0, z: 0}
+--- !u!114 &802042699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802042695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20cb5b024bb9fc747a2cb71b5c27ddc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1122819158
 PrefabInstance:
   m_ObjectHideFlags: 0
