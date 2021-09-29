@@ -13,16 +13,20 @@ public class CameraAction : MonoBehaviour
     Vector2 rectSize;
     uint currentFrame = 0;
     uint sequenceId = 0;
-
+    float beginAspect;
     void Start()
     {
         beginPosition = TargetCamera.rect.position;
         rectSize = TargetCamera.rect.size;
+
+        beginAspect = TargetCamera.aspect;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.C))
+            BeginAction();
 
         if (isRunning)
         {
@@ -42,7 +46,10 @@ public class CameraAction : MonoBehaviour
             Action(t);
 
             currentFrame++;
-            
+            TargetCamera.aspect = beginAspect;
+            TargetCamera.ResetAspect();
+
+            Debug.Log(TargetCamera.aspect.ToString());
         }
     }
 
