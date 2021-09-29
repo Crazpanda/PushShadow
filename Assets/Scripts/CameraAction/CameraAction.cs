@@ -77,6 +77,8 @@ public class CameraAction : MonoBehaviour
     //启动摄像机运动
     public void BeginAction()
     {
+        if (isRunning) return;
+
         beginPosition = TargetCamera.rect.position;
         currentFrame = 0;
         sequenceId = 0;
