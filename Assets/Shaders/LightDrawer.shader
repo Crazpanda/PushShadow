@@ -20,6 +20,37 @@ Shader "Custom/LightDrawer"
     {
         Tags { "Queue"="AlphaTest+48" }
 
+        Pass
+        {
+            ColorMask 0
+
+            CGPROGRAM
+
+            #include "UnityCG.cginc"
+            #include "Lighting.cginc"
+            
+            #pragma vertex vert
+            #pragma fragment frag
+
+            struct v2f {
+                float4 pos : SV_POSITION;
+            };
+
+            v2f vert(appdata_full v)
+            {
+                v2f o;
+                o.pos = UnityObjectToClipPos (v.vertex);
+                return o;
+            }
+
+            half4 frag(v2f IN) : SV_Target
+            {
+                return (half4)0;
+            }
+
+            ENDCG
+        }
+
         Pass{
             Tags { "LightMode"="ForwardAdd" }
             Blend One OneMinusSrcAlpha

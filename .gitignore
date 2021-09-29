@@ -10,3 +10,4 @@ UserSettings/
 Assembly-CSharp.csproj
 TouchShadow.sln
 Temp/
+*.apk
