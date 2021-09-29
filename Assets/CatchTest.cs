@@ -6,7 +6,7 @@ public class CatchTest : MonoBehaviour
 {
     public Camera camera;
 
-    CameraAction[] actions;
+    public CameraAction[] actions;
     // Start is called before the first frame update
     void Start()
     {
