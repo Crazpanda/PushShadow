@@ -32,18 +32,17 @@ public class PlayerController : MonoBehaviour
     public int JumpTime = 300;
     public float JumpSpeed = 0.0f;
     public float DropSpeed = 0.0f;
-    int jumpHeight = 0;
+    int counter = 0;
     void PlayerMove2()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && controller.isGrounded)
         {
-            if (jumpHeight <= -JumpTime)
-                jumpHeight = JumpTime;
+            counter = JumpTime;
         }
-        jumpHeight = Mathf.Max(--jumpHeight, -10000);
+        counter = Mathf.Max(--counter, 0);
 
         Vector3 gravity = Physics.gravity * gravityMultiplier;
-        if(jumpHeight > 0)
+        if(counter > 0)
         {
             gravity = -gravity * JumpSpeed;
         }
@@ -59,7 +58,7 @@ public class PlayerController : MonoBehaviour
         }
 
         trans.Rotate(trans.up, Time.deltaTime * RotateSpeed * Input.GetAxis("Horizontal"));
-
+        
         //Move 
 
         Vector3 move = new Vector3(0.0f, 0.0f, Input.GetAxis("Vertical"));
@@ -74,7 +73,22 @@ public class PlayerController : MonoBehaviour
 
     void PlayerMove3()
     {
+        //if (rotateHandle.IsClick)
+        //{
+        //    if (jumpHeight <= -JumpTime)
+        //        jumpHeight = JumpTime;
+        //}
+        //jumpHeight = Mathf.Max(--jumpHeight, -10000);
+
         Vector3 gravity = Physics.gravity * gravityMultiplier;
+        //if (jumpHeight > 0)
+        //{
+        //    gravity = -gravity * JumpSpeed;
+        //}
+        //else
+        //{
+        //    gravity = gravity * DropSpeed;
+        //}
 
         bool groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0.0f)
@@ -148,7 +162,7 @@ public class PlayerController : MonoBehaviour
         {
             v = theta/ Mathf.Abs(theta);
         }
-
+        
         return v;
     }
 

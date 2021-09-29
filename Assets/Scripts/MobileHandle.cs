@@ -9,9 +9,17 @@ public class MobileHandle : MonoBehaviour, IDragHandler, IEndDragHandler
     Vector2 beginPos;
     Vector2 moved = new Vector2(0, 0);
 
+    bool isClick = false;
+
+    int counter = 5;
     public Vector2 HandleMovedDirection
     {
         get { return moved; }
+    }
+
+    public bool IsClick
+    {
+        get { return isClick; }
     }
 
     void IDragHandler.OnDrag(PointerEventData eventData)
@@ -39,6 +47,17 @@ public class MobileHandle : MonoBehaviour, IDragHandler, IEndDragHandler
     // Update is called once per frame
     void Update()
     {
+        if(isClick)
+        {
+            --counter;
+            if (counter <= 0)
+                isClick = false;
+        }
+    }
 
+    public void OnClick()
+    {
+        counter = 5;
+        isClick = true;
     }
 }
