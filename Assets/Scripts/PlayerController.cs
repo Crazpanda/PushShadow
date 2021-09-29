@@ -11,16 +11,14 @@ public class PlayerController : MonoBehaviour
     public float gravityMultiplier = 0.5f;
     //public Transform CameraTrans;
 
-    public Button MobileMoveButton;
-    public Button MobileRotateButton;
+    public MoveButton MobileMoveButton;
+    public JumpButton MobileJumpButton;
+    public SwitchButton MobileSwitchButton;
     
     Vector3 playerVelocity;
 
     Transform trans;
     CharacterController controller;
-
-    MobileHandle moveHandle;
-    MobileHandle rotateHandle;
 
     public UnityEvent OnPlayerInteract;
 
@@ -29,17 +27,17 @@ public class PlayerController : MonoBehaviour
         OnPlayerInteract.Invoke();
     }
 
-    public int JumpTime = 300;
+    public float JumpTime = 3;
     public float JumpSpeed = 0.0f;
     public float DropSpeed = 0.0f;
-    int counter = 0;
+    float counter = 0;
     void PlayerMove2()
     {
         if (Input.GetKeyDown(KeyCode.Space) && controller.isGrounded)
         {
             counter = JumpTime;
         }
-        counter = Mathf.Max(--counter, 0);
+        counter = Mathf.Max(counter - Time.deltaTime, 0);
 
         Vector3 gravity = Physics.gravity * gravityMultiplier;
         if(counter > 0)
@@ -73,22 +71,21 @@ public class PlayerController : MonoBehaviour
 
     void PlayerMove3()
     {
-        //if (rotateHandle.IsClick)
-        //{
-        //    if (jumpHeight <= -JumpTime)
-        //        jumpHeight = JumpTime;
-        //}
-        //jumpHeight = Mathf.Max(--jumpHeight, -10000);
+        if (MobileJumpButton.IsClick && controller.isGrounded)
+        {
+            counter = JumpTime;
+        }
+        counter = Mathf.Max(counter - Time.deltaTime, 0);
 
         Vector3 gravity = Physics.gravity * gravityMultiplier;
-        //if (jumpHeight > 0)
-        //{
-        //    gravity = -gravity * JumpSpeed;
-        //}
-        //else
-        //{
-        //    gravity = gravity * DropSpeed;
-        //}
+        if (counter > 0)
+        {
+            gravity = -gravity * JumpSpeed;
+        }
+        else
+        {
+            gravity = gravity * DropSpeed;
+        }
 
         bool groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0.0f)
@@ -116,8 +113,6 @@ public class PlayerController : MonoBehaviour
 
         playerVelocity = Vector3.zero;
 
-        moveHandle = MobileMoveButton.GetComponent<MobileHandle>();
-        rotateHandle = MobileRotateButton.GetComponent<MobileHandle>();
     }
 
     // Update is called once per frame
@@ -154,10 +149,10 @@ public class PlayerController : MonoBehaviour
 
     float GetMobileVertical()
     {
-        if (!moveHandle) return 0.0f;
+        if (!MobileMoveButton) return 0.0f;
 
         float v = 0.0f;
-        float theta = Vector2.Dot(new Vector2(0,1), moveHandle.HandleMovedDirection.normalized);
+        float theta = Vector2.Dot(new Vector2(0,1), MobileMoveButton.HandleMovedDirection.normalized);
         if(Mathf.Abs(theta) > 0.8)
         {
             v = theta/ Mathf.Abs(theta);
@@ -168,10 +163,10 @@ public class PlayerController : MonoBehaviour
 
     float GetMobileHorizontal()
     {
-        if (!rotateHandle) return 0.0f;
+        if (!MobileMoveButton) return 0.0f;
 
         float v = 0.0f;
-        float theta = Vector2.Dot(new Vector2(1, 0), moveHandle.HandleMovedDirection.normalized);
+        float theta = Vector2.Dot(new Vector2(1, 0), MobileMoveButton.HandleMovedDirection.normalized);
         if (Mathf.Abs(theta) > 0.8)
         {
             v = theta / Mathf.Abs(theta);

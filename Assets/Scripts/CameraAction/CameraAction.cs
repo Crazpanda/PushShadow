@@ -23,12 +23,6 @@ public class CameraAction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //GL.Clear(false, true, Color.black, 0.0f);
-        
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            BeginAction();
-        }
 
         if (isRunning)
         {
