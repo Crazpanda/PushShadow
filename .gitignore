@@ -11,5 +11,3 @@ Assembly-CSharp.csproj
 TouchShadow.sln
 Temp/
 *.apk
-*.meta
-*.csproj
