@@ -153,7 +153,7 @@ public class ProgressMgrPanel : MonoBehaviour
             //else
             //    gameObject.SetActive(false);
             // 根据存档加载游戲场景
-            SceneManager.LoadScene("TmpSetting");
+            SceneManager.LoadScene("VideoScene");
             return buffer;
         }
         catch (System.Exception ex)

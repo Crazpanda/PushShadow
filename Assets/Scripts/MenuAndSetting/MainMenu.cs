@@ -57,4 +57,11 @@ public class MainMenu : MonoBehaviour
 
         isOpen = !isOpen;
     }
+
+    public void LoadProgress()
+    {
+
+        Debug.Log("LoadProgress");
+        progressMgrPanel.OpenProgressMgrPanel(FileOperationType.Load);
+    }
 }

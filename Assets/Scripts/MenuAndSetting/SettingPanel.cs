@@ -43,7 +43,7 @@ public class SettingPanel : MonoBehaviour
     public void BackToMenu()
     {
         // º”‘ÿ≥°æ∞
-        SceneManager.LoadScene("TmpSetting");
+        SceneManager.LoadScene("VideoScene");
     }
 
     public void Close()
