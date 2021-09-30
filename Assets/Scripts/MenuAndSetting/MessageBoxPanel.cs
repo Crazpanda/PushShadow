@@ -8,12 +8,11 @@ using System.IO;
 
 public class MessageBoxPanel : MonoBehaviour
 {
-    public Button button1;
     public Text text;
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
     public void Show(string message)
@@ -22,7 +21,7 @@ public class MessageBoxPanel : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    public void ClickButton1()
+    public void Close()
     {
         //StopAllCoroutines();
         gameObject.SetActive(false);

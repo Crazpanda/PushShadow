@@ -9,14 +9,16 @@ using System.IO;
 public class ProgressMgrPanel : MonoBehaviour
 {
     public static FileOperationType OperationType = 0;
-    public Text title;
-    public Button button1, button2, button3;
+    //public Text title;
+    public Button button1, button2, button3, confirmButton;
     public MessageBoxPanel mesPanel;
+    public Sprite Normal, Picked, Save, Load;
+    private int selectIdx = -1; 
 
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.SetActive(false);
+        Select(1);// 默認使用第一個存檔
     }
 
     public void Close() 
@@ -30,18 +32,22 @@ public class ProgressMgrPanel : MonoBehaviour
         if (operationType == FileOperationType.Save)
         {
             Debug.Log("OpenProgressMgrPanel Save");
-            title.text = "请选择保存存档";
+            // title.text = "请选择保存存档";
+            confirmButton.GetComponent<Image>().sprite = Save;
             UpdateStoredProgressMsg();
             // GameObject.Find("Title").GetComponent<Text>().text = "请选择保存存档位置";
+            //Debug.Log("OpenProgressMgrPanel Save2");
             gameObject.SetActive(true);
         }
         else if (operationType == FileOperationType.Load)
         {
             Debug.Log("OpenProgressMgrPanel Load");
             // gameObject.GetComponent<Text>().text = "请选择读取存档位置"; 
-            title.text = "请选择读取存档";
+            // title.text = "请选择读取存档";
+            confirmButton.GetComponent<Image>().sprite = Load;
 
             UpdateStoredProgressMsg();
+            //Debug.Log("OpenProgressMgrPanel Load2");
 
             gameObject.SetActive(true);
         }
@@ -53,27 +59,57 @@ public class ProgressMgrPanel : MonoBehaviour
         OperationType = operationType;
     }
 
-    public void Process(int idx)
+    public void Select(int idx)
     {
-        string file = Path.Combine(Globle.progressPath, "data" + idx.ToString());
-
-        // Debug.Log("OpenProgressMgrPanel");
-        if ((FileOperationType)ProgressMgrPanel.OperationType == FileOperationType.Save)
+        if(selectIdx != -1) 
         {
-            Debug.Log("Save2File:" + file);
-            string s = "feawafewfewegtewqggerqgtewafdsfewagerwhg";
-            byte[] bytes = System.Text.Encoding.UTF8.GetBytes(s);
-            _SaveBytes(file, bytes, s.Length);
-            UpdateStoredProgressMsg();
+            button1.GetComponent<Image>().sprite = Normal;
+            button2.GetComponent<Image>().sprite = Normal;
+            button3.GetComponent<Image>().sprite = Normal;
         }
-        else if ((FileOperationType)ProgressMgrPanel.OperationType == FileOperationType.Load)
+        if(idx == 1)
         {
-            Debug.Log("Load File:" + file);
-            _LoadBytes(file);
+            button1.GetComponent<Image>().sprite = Picked;
+        }
+        else if(idx == 2)
+        {
+            button2.GetComponent<Image>().sprite = Picked;
+        }
+        else if (idx == 3)
+        {
+            button3.GetComponent<Image>().sprite = Picked;
+        }
+        selectIdx = idx;
+    }
+
+    public void Confirm()
+    {
+        if(selectIdx == -1)
+        {
+            mesPanel.Show("请先选择记录");
         }
         else
         {
-            Debug.Log("FileOperationType Error");
+            string file = Path.Combine(Globle.progressPath, "data" + selectIdx.ToString());
+
+            // Debug.Log("OpenProgressMgrPanel");
+            if ((FileOperationType)ProgressMgrPanel.OperationType == FileOperationType.Save)
+            {
+                Debug.Log("Save2File:" + file);
+                string s = "feawafewfewegtewqggerqgtewafdsfewagerwhg";
+                byte[] bytes = System.Text.Encoding.UTF8.GetBytes(s);
+                _SaveBytes(file, bytes, s.Length);
+                UpdateStoredProgressMsg();
+            }
+            else if ((FileOperationType)ProgressMgrPanel.OperationType == FileOperationType.Load)
+            {
+                Debug.Log("Load File:" + file);
+                _LoadBytes(file);
+            }
+            else
+            {
+                Debug.Log("FileOperationType Error");
+            }
         }
     }
 
@@ -116,7 +152,8 @@ public class ProgressMgrPanel : MonoBehaviour
             //   SceneManager.LoadScene("VideoScene");
             //else
             //    gameObject.SetActive(false);
-            SceneManager.LoadScene("VideoScene");
+            // 根据存档加载游戲场景
+            SceneManager.LoadScene("TmpSetting");
             return buffer;
         }
         catch (System.Exception ex)
