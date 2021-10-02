@@ -480,8 +480,8 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0
+    x: 0.58
+    y: 0.5
     width: 0.5
     height: 0.5
   near clip plane: 0.3
@@ -531,7 +531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PathSequence:
-  - {x: 0.5, y: 0, z: 1000}
+  - {x: 0.4, y: 0.1, z: 1000}
   PostProcessMat: {fileID: 2100000, guid: 3cc91e7c4fff48f47ade6a4d56091133, type: 2}
 --- !u!114 &802042700
 MonoBehaviour:
@@ -578,6 +578,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 802042697}
+  actions: []
 --- !u!4 &890362810
 Transform:
   m_ObjectHideFlags: 0
@@ -610,6 +611,18 @@ PrefabInstance:
     - target: {fileID: 1231604452853141526, guid: e3b73fb7f23836c47b9aa1d7d235b4b7, type: 3}
       propertyPath: JumpSpeed
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431832199541110597, guid: e3b73fb7f23836c47b9aa1d7d235b4b7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431832199541110597, guid: e3b73fb7f23836c47b9aa1d7d235b4b7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431832199541110597, guid: e3b73fb7f23836c47b9aa1d7d235b4b7, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6749045927627819117, guid: e3b73fb7f23836c47b9aa1d7d235b4b7, type: 3}
       propertyPath: m_RootOrder
