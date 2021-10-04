@@ -57,6 +57,8 @@ public class SwitchButton : MonoBehaviour,IPointerClickHandler,IPointerUpHandler
         //    state = true;
         //}
 
+        if (!ShadowModeManager.Instance) return;
+
         ShadowMode mode = ShadowModeManager.Instance.CurrentShadowMode;
         if (mode == ShadowMode.Interactive)
         {
@@ -81,6 +83,8 @@ public class SwitchButton : MonoBehaviour,IPointerClickHandler,IPointerUpHandler
     // Update is called once per frame
     void Update()
     {
+        if (!ShadowModeManager.Instance) return;
+
         ShadowMode mode = ShadowModeManager.Instance.CurrentShadowMode;
         if (mode == ShadowMode.Interactive)
         {

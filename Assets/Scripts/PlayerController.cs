@@ -131,26 +131,6 @@ public class PlayerController : MonoBehaviour
         PlayerMove3();
     }
 
-    //float GetMobileVertical()
-    //{
-    //    if (!moveHandle) return 0.0f;
-
-    //    float v = moveHandle.HandleMovedDirection.y;
-    //    v = v==0.0f?0.0f: v / Mathf.Abs(v);
-
-    //    return v;
-    //}
-
-    //float GetMobileHorizontal()
-    //{
-    //    if (!rotateHandle) return 0.0f;
-
-    //    float v = rotateHandle.HandleMovedDirection.x;
-    //    v = v == 0.0f ? 0.0f : v / Mathf.Abs(v);
-
-    //    return v;
-    //}
-
     float GetMobileVertical()
     {
         if (!MobileMoveButton) return 0.0f;
