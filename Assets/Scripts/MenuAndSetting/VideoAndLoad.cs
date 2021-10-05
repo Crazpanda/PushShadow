@@ -19,7 +19,7 @@ public class VideoAndLoad : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print("frame count: "+videoPlayer.frame+", frame allCount: "+videoPlayer.frameCount);
+        //print("frame count: "+videoPlayer.frame+", frame allCount: "+videoPlayer.frameCount);
         if (videoPlayer.frame+10 >= (long) videoPlayer.frameCount) {
             SceneManager.LoadScene("teach");
         }

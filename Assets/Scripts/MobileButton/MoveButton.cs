@@ -19,6 +19,8 @@ public class MoveButton : MonoBehaviour, IDragHandler, IEndDragHandler
     RectTransform dynamicTrans;
     RectTransform lineTrans;
     Vector2 beginPos;
+    Vector2 beginPosWorld;
+
     Vector2 moved = new Vector2(0, 0);
     public Vector2 HandleMovedDirection
     {
@@ -35,6 +37,7 @@ public class MoveButton : MonoBehaviour, IDragHandler, IEndDragHandler
 
         dynamicTrans = DynamicImage.GetComponent<RectTransform>();
         beginPos = dynamicTrans.anchoredPosition;
+        beginPosWorld = dynamicTrans.position;
 
         lineTrans = LineImage.GetComponent<RectTransform>();
     }
@@ -52,19 +55,23 @@ public class MoveButton : MonoBehaviour, IDragHandler, IEndDragHandler
 
         ButtonImage.sprite = DragOnIcon;
 
-        dynamicTrans.anchoredPosition += eventData.delta;
-        float dis = Vector2.Distance(dynamicTrans.anchoredPosition, beginPos) / MoveRadius;
-        if (dis >= 1.0f)
+        Vector2 nextPos = dynamicTrans.anchoredPosition + eventData.delta;
+        Vector2 dir = nextPos - beginPos;
+
+        float length = dir.magnitude / MoveRadius;
+        if (length > 1.0f)
         {
-            dynamicTrans.anchoredPosition = moved.normalized * MoveRadius;
+            dynamicTrans.anchoredPosition = beginPos + dir.normalized * MoveRadius;
         }
-        
+        else
+            dynamicTrans.anchoredPosition = nextPos;
+
         moved = dynamicTrans.anchoredPosition - beginPos;
+        float lineDegress = -Mathf.Rad2Deg * Mathf.Atan2(moved.x, moved.y);
 
-        float lineDegress = -Mathf.Rad2Deg * Mathf.Atan2(moved.x,moved.y);
-
-        lineTrans.eulerAngles = new Vector3(0,0, lineDegress);
-        lineTrans.localScale = new Vector3(1, dis, 1);
+        lineTrans.eulerAngles = new Vector3(0, 0, lineDegress);
+        lineTrans.localScale = new Vector3(1, length, 1);
+        
     }
 
     void IEndDragHandler.OnEndDrag(PointerEventData eventData)

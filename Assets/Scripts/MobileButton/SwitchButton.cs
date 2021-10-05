@@ -8,54 +8,13 @@ public class SwitchButton : MonoBehaviour,IPointerClickHandler,IPointerUpHandler
 {
     public Sprite LightenModeIcon;
     public Sprite ShadowModeIcon;
-    public Sprite ManualLightenModeIcon;
-    public Sprite ManualShadowModeIcon;
+    public Sprite TeachLightenModeIcon;
+    public Sprite TeachlShadowModeIcon;
 
     Image image;
 
-    bool isManualLight = false;
-    bool isManulaShadow = false;
-
-    bool isClick = false;
-    public bool IsClick
-    {
-        get { return isClick; }
-    }
-
-    //true : LightenMode , false : ShadowMode
-    bool state = true;
-    bool LightState
-    {
-        get { return state; }
-    }
-
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {
-        isClick = true;
-
-        //if (state)
-        //{
-        //    if (isManulaShadow)
-        //    {
-        //        image.sprite = ManualShadowModeIcon;
-        //        isManulaShadow = false;
-        //    }
-        //    else
-        //        image.sprite = ShadowModeIcon;
-        //    state = false;
-        //}
-        //else if (!state)
-        //{
-        //    if (isManualLight)
-        //    {
-        //        image.sprite = ManualLightenModeIcon;
-        //        isManualLight = false;
-        //    }
-        //    else
-        //        image.sprite = LightenModeIcon;
-
-        //    state = true;
-        //}
 
         if (!ShadowModeManager.Instance) return;
 
@@ -75,9 +34,6 @@ public class SwitchButton : MonoBehaviour,IPointerClickHandler,IPointerUpHandler
     {
         image = GetComponent<Image>();
         image.sprite = LightenModeIcon;
-        state = true;
-
-        //SetManualButton();
     }
 
     // Update is called once per frame
@@ -94,22 +50,6 @@ public class SwitchButton : MonoBehaviour,IPointerClickHandler,IPointerUpHandler
         {
             image.sprite = LightenModeIcon;
         }
-    }
-
-    void LateUpdate()
-    {
-        isClick = false;
-    }
-
-    public void SetManualButton()
-    {
-        isManualLight = true;
-        isManulaShadow = true;
-
-        if (state)
-            image.sprite = ManualLightenModeIcon;
-        else
-            image.sprite = ManualShadowModeIcon;
     }
 
     void IPointerUpHandler.OnPointerUp(PointerEventData eventData)
