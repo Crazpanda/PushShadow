@@ -54,10 +54,10 @@ public class MainMenu : MonoBehaviour
             mainPanel.GetComponent<RectTransform>().localScale = new Vector2(1, 1f);
             mainSetting.GetComponent<Image> ().sprite = SettingOn;  
         }
-
+        
         isOpen = !isOpen;
     }
-
+    
     public void LoadProgress()
     {
 

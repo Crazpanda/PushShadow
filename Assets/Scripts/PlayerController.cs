@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
     {
         trans = GetComponent<Transform>();
         controller = GetComponent<CharacterController>();
-
+        
         playerVelocity = Vector3.zero;
 
     }
