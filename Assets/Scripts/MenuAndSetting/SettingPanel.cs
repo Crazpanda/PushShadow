@@ -32,7 +32,11 @@ public class SettingPanel : MonoBehaviour
 
     public void QuitGame()
     {
-        Application.Quit();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+         Application.Quit();
+#endif
     }
 
     public void Open()
@@ -43,7 +47,7 @@ public class SettingPanel : MonoBehaviour
     public void BackToMenu()
     {
         // º”‘ÿ≥°æ∞
-        SceneManager.LoadScene("VideoScene");
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void Close()

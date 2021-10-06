@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.IO;
 
-
 public class ProgressMgrPanel : MonoBehaviour
 {
     public static FileOperationType OperationType = 0;
@@ -96,15 +95,18 @@ public class ProgressMgrPanel : MonoBehaviour
             if ((FileOperationType)ProgressMgrPanel.OperationType == FileOperationType.Save)
             {
                 Debug.Log("Save2File:" + file);
-                string s = "feawafewfewegtewqggerqgtewafdsfewagerwhg";
-                byte[] bytes = System.Text.Encoding.UTF8.GetBytes(s);
+                string s = SceneManager.GetActiveScene().name;
+                byte[] bytes = System.Text.Encoding.ASCII.GetBytes(s);
                 _SaveBytes(file, bytes, s.Length);
                 UpdateStoredProgressMsg();
             }
             else if ((FileOperationType)ProgressMgrPanel.OperationType == FileOperationType.Load)
             {
                 Debug.Log("Load File:" + file);
-                _LoadBytes(file);
+                byte[] bytes = _LoadBytes(file);
+                string sceneName = System.Text.Encoding.ASCII.GetString(bytes);
+
+                SceneManager.LoadScene(sceneName);
             }
             else
             {
@@ -117,7 +119,8 @@ public class ProgressMgrPanel : MonoBehaviour
     {
         try
         {
-            FileStream stream = new FileStream(file, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            FileStream stream = new FileStream(file, FileMode.Create, FileAccess.ReadWrite);
+            
             stream.Write(bytes, 0, len);
             stream.Close();
             stream.Dispose();
@@ -153,7 +156,7 @@ public class ProgressMgrPanel : MonoBehaviour
             //else
             //    gameObject.SetActive(false);
             // 根据存档加载游戲场景
-            SceneManager.LoadScene("VideoScene");
+            //SceneManager.LoadScene("VideoScene");
             return buffer;
         }
         catch (System.Exception ex)
