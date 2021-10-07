@@ -25,7 +25,7 @@ public class InteractableTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<PlayerController>().OnPlayerInteract.AddListener(OnInteract);
+            other.gameObject.GetComponent<PlayerControllerCat>().OnPlayerInteract.AddListener(OnInteract);
         }
     }
 
@@ -33,7 +33,7 @@ public class InteractableTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<PlayerController>().OnPlayerInteract.RemoveListener(OnInteract);
+            other.gameObject.GetComponent<PlayerControllerCat>().OnPlayerInteract.RemoveListener(OnInteract);
         }
     }
 }
