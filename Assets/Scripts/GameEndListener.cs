@@ -7,9 +7,9 @@ public class GameEndListener : MonoBehaviour
 {
     // Start is called before the first frame update
     public AimLocation[] Aims;
+
     public string NextSceneName;
     public GameObject EndCanvas;
-
     void Start()
     {
         EndCanvas.SetActive(false);
@@ -33,7 +33,9 @@ public class GameEndListener : MonoBehaviour
 
         if(isEnd)
         {
-            EndCanvas.SetActive(true);
+            //EndCanvas.SetActive(true);
+
+            SceneManager.LoadScene(NextSceneName);
         }
     }
 
