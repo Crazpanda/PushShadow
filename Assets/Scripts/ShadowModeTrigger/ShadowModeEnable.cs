@@ -14,6 +14,16 @@ public class ShadowModeEnable : ShadowModeChangeBehaviorBase
         OnShadowModeChanged(ShadowModeManager.Instance.CurrentShadowMode);
     }
 
+    private void OnEnable()
+    {
+        if (ShadowModeManager.Instance == null)
+        {
+            return;
+        }
+
+        OnShadowModeChanged(ShadowModeManager.Instance.CurrentShadowMode);
+    }
+
     public override void OnShadowModeChanged(ShadowMode shadowMode)
     {
         if (gameObjsToEnable.Length == 0)
