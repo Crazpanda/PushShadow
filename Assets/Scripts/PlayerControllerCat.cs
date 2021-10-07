@@ -123,8 +123,11 @@ public class PlayerControllerCat : MonoBehaviour
         CharacterAnimator.SetFloat(animMoveSpeedHash, MaxMoveSpeed * 0.5f);
         CharacterAnimator.SetFloat(animRotateSpeedHash, RotateSpeed * 0.005f);
 
-        float horizontal = GetMobileHorizontal();
-        float vertical = GetMobileVertical();
+        //float horizontal = GetMobileHorizontal();
+        //float vertical = GetMobileVertical();
+        float horizontal;
+        float vertical;
+        GetMobileVertAndHori(out vertical,out horizontal);
 
         if (MobileJumpButton.IsClick && controller.isGrounded && vertical >= 0 && horizontal == 0)
         {
@@ -188,6 +191,9 @@ public class PlayerControllerCat : MonoBehaviour
         playerVelocity += gravity * Time.deltaTime;
         controller.Move(gravity * Time.deltaTime);
 
+        
+        //Debug.Log("Handle Moved Degress : " + lineDegress);
+
         //Move
 
         //if (MobileSwitchButton.IsClick)
@@ -241,5 +247,74 @@ public class PlayerControllerCat : MonoBehaviour
         }
 
         return v;
+    }
+
+    void GetMobileVertAndHori(out float verticl,out float horizontal)
+    {
+        verticl = 0;
+        horizontal = 0;
+
+        Vector2 HandleMoved = MobileMoveButton.HandleMovedDirection;
+        float handleDregess = Mathf.Rad2Deg * Mathf.Atan2(HandleMoved.x, HandleMoved.y);
+        if (handleDregess == 0) return;
+
+        if(handleDregess > 0)
+        {
+            float v = Mathf.Abs(handleDregess);
+            if(v >=0 && v<30)
+            {
+                verticl = 1;
+                horizontal = 0;
+            }
+            else if(v >=30 && v<60)
+            {
+                verticl = 1;
+                horizontal = 1;
+            }
+            else if(v >=60 && v<120)
+            {
+                verticl = 0;
+                horizontal = 1;
+            }
+            else if(v >= 120 && v < 150)
+            {
+                verticl = -1;
+                horizontal = 1;
+            }
+            else if(v >= 150 && v<180)
+            {
+                verticl = -1;
+                horizontal = 0;
+            }
+        }
+        else
+        {
+            float v = Mathf.Abs(handleDregess);
+            if (v >= 0 && v < 30)
+            {
+                verticl = 1;
+                horizontal = 0;
+            }
+            else if (v >= 30 && v < 60)
+            {
+                verticl = 1;
+                horizontal = -1;
+            }
+            else if (v >= 60 && v < 120)
+            {
+                verticl = 0;
+                horizontal = -1;
+            }
+            else if (v >= 120 && v < 150)
+            {
+                verticl = -1;
+                horizontal = -1;
+            }
+            else if (v >= 150 && v < 180)
+            {
+                verticl = -1;
+                horizontal = 0;
+            }
+        }
     }
 }
