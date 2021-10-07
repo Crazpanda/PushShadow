@@ -13,7 +13,12 @@ Shader "Custom/EntityOccluder"
 
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags
+        {
+            "RenderType" = "Opaque"
+            "Queue" = "Geometry-1"
+        }
+        
 
         // Depth fill pass
         Pass
@@ -38,7 +43,7 @@ Shader "Custom/EntityOccluder"
 
             half4 frag(v2f IN) : SV_Target
             {
-                return (half4)0;
+                return (half4)1;
             }
 
             ENDCG
