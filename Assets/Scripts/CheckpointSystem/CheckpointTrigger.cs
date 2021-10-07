@@ -36,7 +36,7 @@ public class CheckpointTrigger : MonoBehaviour
         CheckpointManager.Instance.OnCheckpointTriggered(this);
     }
 
-    private void Start()
+    private void Awake()
     {
         triggerIsActive = false;
         playerInTrigger = false;

@@ -6,6 +6,8 @@ using UnityEngine;
 public class CameraClearFlagsImg : MonoBehaviour
 {
     public Texture imgBackground;
+    public Canvas canvas;
+
     public Vector2 texScale = Vector2.one;
     public Vector2 texOffset = Vector2.zero;
     Camera cameraComp;
@@ -16,6 +18,8 @@ public class CameraClearFlagsImg : MonoBehaviour
 
     private void OnPreRender()
     {
+        Texture2D overlay = new Texture2D((int)cameraComp.pixelRect.width, (int)cameraComp.pixelRect.height, TextureFormat.RGB24, true);
+        //overlay.ReadPixels()
         Graphics.Blit(imgBackground, cameraComp.targetTexture, texScale, texOffset);
     }
 }
