@@ -19,6 +19,7 @@ public class RespawnVolume : MonoBehaviour
             other.transform.rotation = respawnPoint.rotation;
             characterController.enabled = true;
             ShadowModeManager.Instance.ChangeShadowMode(respawnedMode);
+            ShadowModeManager.Instance.ClearShadows();
 
             if (respawnEvents.Length > 0)
             {

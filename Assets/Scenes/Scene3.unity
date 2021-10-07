@@ -8603,7 +8603,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3920825966779887560, guid: 7d5640f2ad6130a40a738a544a1c4786, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3920825966779887561, guid: 7d5640f2ad6130a40a738a544a1c4786, type: 3}
       propertyPath: m_SizeDelta.x
@@ -8615,7 +8615,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3920825966875084086, guid: 7d5640f2ad6130a40a738a544a1c4786, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3920825966875084087, guid: 7d5640f2ad6130a40a738a544a1c4786, type: 3}
       propertyPath: m_SizeDelta.x
@@ -8632,6 +8632,10 @@ PrefabInstance:
     - target: {fileID: 3920825966875084087, guid: 7d5640f2ad6130a40a738a544a1c4786, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -269.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3920825967020474689, guid: 7d5640f2ad6130a40a738a544a1c4786, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3920825967869628602, guid: 7d5640f2ad6130a40a738a544a1c4786, type: 3}
       propertyPath: m_RootOrder
@@ -8681,13 +8685,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainCamera
       objectReference: {fileID: 0}
+    - target: {fileID: 3920825967869628606, guid: 7d5640f2ad6130a40a738a544a1c4786, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3920825968316925620, guid: 7d5640f2ad6130a40a738a544a1c4786, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3920825968589547640, guid: 7d5640f2ad6130a40a738a544a1c4786, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -297.3
       objectReference: {fileID: 0}
     - target: {fileID: 3920825968589547647, guid: 7d5640f2ad6130a40a738a544a1c4786, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d5640f2ad6130a40a738a544a1c4786, type: 3}

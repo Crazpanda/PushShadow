@@ -90,6 +90,11 @@ public class ShadowModeManager : MonoBehaviour
         Debug.Log($"[ShadowModeManager] Player exited {shadowTrigger.gameObject.name}, IsPlayerInShadow = {IsPlayerInShadow}");
     }
 
+    public void ClearShadows()
+    {
+        shadowsPlayerIn.Clear();
+    }
+
     public void ChangeShadowMode(ShadowMode shadowMode)
     {
         if (IsPlayerInShadow && shadowMode == ShadowMode.Interactive)
