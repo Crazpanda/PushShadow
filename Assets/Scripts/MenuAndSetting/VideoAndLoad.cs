@@ -21,7 +21,7 @@ public class VideoAndLoad : MonoBehaviour
     {
         //print("frame count: "+videoPlayer.frame+", frame allCount: "+videoPlayer.frameCount);
         if (videoPlayer.frame+10 >= (long) videoPlayer.frameCount) {
-            SceneManager.LoadScene("teach");
+            SceneManager.LoadScene("teach_Scene");
         }
     }
 }
