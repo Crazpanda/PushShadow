@@ -212,7 +212,7 @@ public class PlayerControllerCat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerMove2();
+        PlayerMove3();
     }
 
     float GetMobileVertical()
