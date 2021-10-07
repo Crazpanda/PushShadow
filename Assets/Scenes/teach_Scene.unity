@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.42194438, g: 0.4025875, b: 0.39621457, a: 1}
+  m_IndirectSpecularColor: {r: 0.20670235, g: 0.20596763, b: 0.21415433, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2099,7 +2099,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6749045927627819121, guid: e3b73fb7f23836c47b9aa1d7d235b4b7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7115745996534095593, guid: e3b73fb7f23836c47b9aa1d7d235b4b7, type: 3}
       propertyPath: m_AnchorMax.x
@@ -7722,6 +7722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imgBackground: {fileID: 2800000, guid: 6b961fedfa3c22c41b5e9f342990bde4, type: 3}
+  canvas: {fileID: 0}
   texScale: {x: 1, y: 1}
   texOffset: {x: 0, y: 0}
 --- !u!20 &701019419
@@ -8028,7 +8029,6 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Camera1
   m_TagString: MainCamera
@@ -8049,6 +8049,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imgBackground: {fileID: 2800000, guid: 7e757450a2e536f4fa4cd02e8e66e882, type: 3}
+  canvas: {fileID: 0}
   texScale: {x: 1, y: 1}
   texOffset: {x: 0, y: 0}
 --- !u!20 &963194227
@@ -8108,14 +8109,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 40, y: -75, z: 0}
---- !u!81 &963194229
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
 --- !u!1 &984371379 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5140668806834326794, guid: b20ef74cae856e44dbf06cf0bc9eee63, type: 3}
@@ -8286,6 +8279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imgBackground: {fileID: 2800000, guid: a67590cade771384cbae0fa9ca259ccc, type: 3}
+  canvas: {fileID: 0}
   texScale: {x: 1, y: 1}
   texOffset: {x: 0, y: 0}
 --- !u!20 &1021473719
@@ -8954,6 +8948,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCat
       objectReference: {fileID: 0}
+    - target: {fileID: 7734440828591580618, guid: aaeee78a341f4944e85b207efd2ea809, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7734440828591580630, guid: aaeee78a341f4944e85b207efd2ea809, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -9126,6 +9124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imgBackground: {fileID: 2800000, guid: 1accdde8bc63a774db96d506c22babd7, type: 3}
+  canvas: {fileID: 0}
   texScale: {x: 1, y: 1}
   texOffset: {x: 0, y: 0}
 --- !u!20 &1311888761
@@ -9318,6 +9317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imgBackground: {fileID: 2800000, guid: 4bb091e113efe124fb92d2f0709d79c1, type: 3}
+  canvas: {fileID: 0}
   texScale: {x: 1, y: 1}
   texOffset: {x: 0, y: 0}
 --- !u!81 &1322605612
@@ -9417,6 +9417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imgBackground: {fileID: 2800000, guid: 5ac1ced090385c14b9bb5a0ee5c3a6ed, type: 3}
+  canvas: {fileID: 0}
   texScale: {x: 1, y: 1}
   texOffset: {x: 0, y: 0}
 --- !u!20 &1329184247
