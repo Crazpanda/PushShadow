@@ -11,6 +11,11 @@ public class CameraAction : MonoBehaviour
     private Camera TargetCamera;
 
     bool isRunning = false;
+    public bool IsRunning
+    {
+        get { return isRunning; }
+    }
+
     Vector2 beginPosition;
     Vector2 rectSize;
     uint currentFrame = 0;

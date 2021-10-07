@@ -3124,6 +3124,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 189603764925827022, guid: aecfcbfe65a9eb84ca89ef77cb175698, type: 3}
+      propertyPath: backgroundSound
+      value: 
+      objectReference: {fileID: 482359279}
     - target: {fileID: 823159981840091136, guid: aecfcbfe65a9eb84ca89ef77cb175698, type: 3}
       propertyPath: m_RootOrder
       value: 5
