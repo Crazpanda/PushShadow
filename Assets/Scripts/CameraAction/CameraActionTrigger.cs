@@ -6,8 +6,8 @@ public class CameraActionTrigger : MonoBehaviour
 {
     public uint StageId;
     public CameraActionManager1 Manager;
-    public PlayerController PlayerCon;
-
+    public PlayerControllerCat PlayerCat;
+    public PlayerController Player;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,14 +18,22 @@ public class CameraActionTrigger : MonoBehaviour
     void Update()
     {
         if (Manager.IsRunning() == false)
-            PlayerCon.enabled = true;
+        {
+            if(Player)
+                Player.enabled = true;
+            if (PlayerCat)
+                PlayerCat.enabled = true;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        PlayerCon.enabled = false;
+        if (Player)
+            Player.enabled = false;
+        if (PlayerCat)
+            PlayerCat.enabled = false;
 
-        if(other.tag == "Player")
+        if (other.tag == "Player")
         {
             switch(StageId)
             {

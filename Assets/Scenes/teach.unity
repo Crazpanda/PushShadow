@@ -3419,6 +3419,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StageId: 0
   Manager: {fileID: 1938469366}
+  PlayerCon: {fileID: 2053277045}
 --- !u!65 &721170606
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9408,6 +9409,17 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!114 &2053277045 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1231604452853141526, guid: e3b73fb7f23836c47b9aa1d7d235b4b7, type: 3}
+  m_PrefabInstance: {fileID: 373745939}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcc0a391b4f2b3d4b966c7374005bb07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2077025613
 GameObject:
   m_ObjectHideFlags: 0

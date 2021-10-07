@@ -18,8 +18,9 @@ public class CameraActionManager1 : MonoBehaviour
     CameraAction Action4;
     void Start()
     {
-        Camera1.rect = new Rect(new Vector2(0, 0), Camera1.rect.size);
-        Camera2.rect = new Rect(new Vector2(0.3f, 0.0f), Camera2.rect.size);
+        CameraBig.rect = new Rect(new Vector2(0.2f, 0.51f), CameraBig.rect.size);
+        Camera1.rect = new Rect(new Vector2(0.2f, 0.01f), Camera1.rect.size);
+        Camera2.rect = new Rect(new Vector2(0.47f, 0.01f), Camera2.rect.size);
         Camera3.rect = new Rect(new Vector2(1.0f, 0.0f), Camera3.rect.size);
         Camera4.rect = new Rect(new Vector2(1.3f, 0.0f), Camera4.rect.size);
 
