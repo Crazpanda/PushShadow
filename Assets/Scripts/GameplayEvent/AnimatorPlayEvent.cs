@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class AnimatorPlayEvent : GameplayEvent
 {
-    public Animator animator;
+    public Animation animationClip;
+    public string clipToPlay;
     public override void OnEventTriggered()
     {
-
+        animationClip[clipToPlay].wrapMode = WrapMode.Once;
+        animationClip.Play(clipToPlay);
     }
 }
