@@ -312,7 +312,7 @@ GameObject:
   - component: {fileID: 61888319}
   - component: {fileID: 61888318}
   - component: {fileID: 61888317}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1019,27 +1019,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5328777700682980262, guid: aecfcbfe65a9eb84ca89ef77cb175698, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6026850258819345855, guid: aecfcbfe65a9eb84ca89ef77cb175698, type: 3}
+      propertyPath: m_AnchorMax.x
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6026850258819345855, guid: aecfcbfe65a9eb84ca89ef77cb175698, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6026850258819345855, guid: aecfcbfe65a9eb84ca89ef77cb175698, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6026850258819345855, guid: aecfcbfe65a9eb84ca89ef77cb175698, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9066782700043744886, guid: aecfcbfe65a9eb84ca89ef77cb175698, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9066782700043744886, guid: aecfcbfe65a9eb84ca89ef77cb175698, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aecfcbfe65a9eb84ca89ef77cb175698, type: 3}
@@ -1055,7 +1055,7 @@ GameObject:
   - component: {fileID: 326775484}
   - component: {fileID: 326775483}
   - component: {fileID: 326775482}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube (18)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3691,7 +3691,7 @@ GameObject:
   - component: {fileID: 777689890}
   - component: {fileID: 777689889}
   - component: {fileID: 777689888}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3786,7 +3786,7 @@ GameObject:
   - component: {fileID: 796285390}
   - component: {fileID: 796285389}
   - component: {fileID: 796285388}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube (19)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4422,7 +4422,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh502678
+  m_Name: pb_Mesh532640
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4787,7 +4787,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 88375
+    m_Bits: 86327
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -5609,7 +5609,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 153911
+    m_Bits: 151863
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -6326,7 +6326,7 @@ GameObject:
   - component: {fileID: 1509738405}
   - component: {fileID: 1509738404}
   - component: {fileID: 1509738403}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6605,7 +6605,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh502588
+  m_Name: pb_Mesh532550
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7137,7 +7137,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1651955695}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.81, y: 4.24, z: -2.43}
+  m_LocalPosition: {x: 10.13, y: 3.06, z: 11.02}
   m_LocalScale: {x: 1.04, y: 3.56, z: 9.68}
   m_Children: []
   m_Father: {fileID: 0}
@@ -7250,7 +7250,7 @@ GameObject:
   - component: {fileID: 1676878209}
   - component: {fileID: 1676878208}
   - component: {fileID: 1676878207}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7884,7 +7884,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh502650
+  m_Name: pb_Mesh532612
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8426,7 +8426,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh502868
+  m_Name: pb_Mesh532830
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
