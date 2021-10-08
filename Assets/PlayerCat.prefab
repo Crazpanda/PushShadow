@@ -960,11 +960,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7637552483385428487, guid: ae9aee5f237ec2b4d92d3aba5df3f876, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 100
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 7637552483385428487, guid: ae9aee5f237ec2b4d92d3aba5df3f876, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 7637552483385428487, guid: ae9aee5f237ec2b4d92d3aba5df3f876, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1000,7 +1000,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7637552483385428487, guid: ae9aee5f237ec2b4d92d3aba5df3f876, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 207
+      value: 256.89
       objectReference: {fileID: 0}
     - target: {fileID: 7637552483385428487, guid: ae9aee5f237ec2b4d92d3aba5df3f876, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1017,6 +1017,14 @@ PrefabInstance:
     - target: {fileID: 7637552483385428488, guid: ae9aee5f237ec2b4d92d3aba5df3f876, type: 3}
       propertyPath: m_Name
       value: MoveButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7637552484141337680, guid: ae9aee5f237ec2b4d92d3aba5df3f876, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 7637552484141337680, guid: ae9aee5f237ec2b4d92d3aba5df3f876, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae9aee5f237ec2b4d92d3aba5df3f876, type: 3}
