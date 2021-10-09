@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
     public Button mainSetting, endButton;
     public Slider mainSlider;
     public AudioSource backgroundSound;
+    public AudioSource buttonSound;
     public GameObject mainPanel;
     public ProgressMgrPanel progressMgrPanel;
     public Sprite SettingOn, SettingOff;
@@ -33,10 +34,18 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    public void StartGame() {
-        print("start game notify");
+    void LoadVidioScene()
+    {
         // 加载场景
         SceneManager.LoadScene("VideoScene");
+    }
+    public void StartGame() {
+        print("start game notify");
+
+        buttonSound.Play();
+
+        //buttonSound.clip.length 为音频的播放时间
+        Invoke("LoadVidioScene", buttonSound.clip.length);
     }
 
     public void MainVolume() {
