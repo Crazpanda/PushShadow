@@ -37,7 +37,7 @@ public class MainMenu : MonoBehaviour
     void LoadVidioScene()
     {
         // 加载场景
-        SceneManager.LoadScene("VideoScene");
+        SceneManager.LoadScene("teach_Scene");
     }
     public void StartGame() {
         print("start game notify");
